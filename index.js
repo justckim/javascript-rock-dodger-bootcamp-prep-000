@@ -43,13 +43,14 @@ function createRock(x) {
   function moveRock() {
 
     function step() {
-      rock.style.top = `${top += 2}px`
-      
+           
       if (checkCollision(rock) === true) {
-        endGame()
-      }
+          endGame()
+          return
+      }  
       
       else if (top < 400) {
+        rock.style.top = `${top += 2}px`
         window.requestAnimationFrame(step)
       }    
       
@@ -62,8 +63,9 @@ function createRock(x) {
   
   moveRock()
   
-   // Add the rock to ROCKS so that we can remove all rocks when there's a collision
+  // Add the rock to ROCKS so that we can remove all rocks when there's a collision
   ROCKS.push(rock)
+
   return rock
 }
 
@@ -84,6 +86,8 @@ function endGame() {
   window.removeEventListener('keydown', moveDodger)
   
   alert("YOU LOSE!")
+  
+  return
 }
 
 function moveDodger(e) {
@@ -108,7 +112,7 @@ function moveDodgerLeft() {
     if (dodgerLeftEdge > 0) {
       dodger.style.left = `${dodgerLeftEdge - 6}px`
     }
-    //window.requestAnimationFrame(step);
+  //  window.requestAnimationFrame(step);
   //}
   //window.requestAnimation(step)
 }
